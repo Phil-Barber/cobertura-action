@@ -120,7 +120,7 @@ test("action passing pull request number directly", async () => {
   });
 });
 
-test("action only changes", async () => {
+test.only("action only changes", async () => {
   expect.assertions(1);
   const { action } = require("./action");
   process.env["INPUT_PATH"] = "./src/fixtures/test-branch.xml";
@@ -145,7 +145,7 @@ test("action only changes", async () => {
     .get(`/repos/${owner}/${repo}/pulls/${prNumber}/files`)
     .reply(200, [
       {
-        filename: dummyReport.files[0].filename,
+        filename: "search/BinarySearch.java",
       },
     ]);
   await action({
@@ -159,6 +159,7 @@ test("action only changes", async () => {
     | File | Coverage |   |
     | - | :-: | :-: |
     | **All files** | \`83%\` | :x: |
+    | search/BinarySearch.java | \`88%\` | :x: |
 
     _Minimum allowed coverage is \`100%\`_
 

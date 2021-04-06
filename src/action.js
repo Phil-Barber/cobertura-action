@@ -81,9 +81,17 @@ function markdownReport(reports, commit, options) {
   let output = "";
   for (const report of reports) {
     const folder = reports.length <= 1 ? "" : ` ${report.folder}`;
-    for (const file of report.files.filter(
-      (file) => filteredFiles == null || filteredFiles.includes(file.filename)
-    )) {
+    console.log(report);
+    for (const file of report.files.filter((file) => {
+      console.log(
+        file.filename,
+        filteredFiles,
+        filteredFiles == null,
+        filteredFiles.includes(file.filename)
+      );
+      return filteredFiles == null || filteredFiles.includes(file.filename);
+    })) {
+      console.log("In filtered");
       const fileTotal = Math.round(file.total);
       const fileLines = Math.round(file.line);
       const fileBranch = Math.round(file.branch);
